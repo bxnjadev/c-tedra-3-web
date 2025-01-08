@@ -1,1 +1,29 @@
-<p>posts works!</p>
+<div class="mx-32">
+    <header class>
+        <h1 class="font-medium text-2xl pb-2">Visualización de Posts</h1>
+        <hr>
+    </header>
+    <main class="mt-4">
+        <div class="flex">
+            <div *ngIf="posts.length > 0; else noPosts">
+                <div *ngFor="let post of posts">
+                    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <a href="#">
+                            <img class="rounded-t-lg" [src]="post.imageUrl" alt="" />
+                        </a>
+                        <div class="p-5">
+                            <a href="#">
+                                <h5 class="mb-2 text-normal font-medium tracking-tight text-gray-900 dark:text-white">{{ post.title }}</h5>
+                            </a>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Fecha de creación: {{ post.dateCreated }} </p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Usuario: {{post.userName}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-template #noPosts>
+                <h1 class="text-3xl text-center">No hay posts disponibles :(</h1>
+            </ng-template>
+        </div>
+    </main>
+</div>
