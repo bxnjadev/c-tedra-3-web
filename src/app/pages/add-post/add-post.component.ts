@@ -24,9 +24,18 @@ export class AddPostComponent implements OnInit {
 
   createForm(){
     this.form = this.formBuilder.group({
-        "title": ['', [Validators.required]],
-        "date": ['']
+        "title": ['', [Validators.required, Validators.minLength(5)]],
+        "date": [''],
+        "file": [null]
     });
+  }
+
+  onFileChange(event : Event) : void {
+    const input = event.target as HTMLInputElement;
+    if (input?.files?.length) {
+      const file = input.files[0];
+      this.form.patchValue({ file }); 
+    }
   }
 
   getProperty(property : string) {

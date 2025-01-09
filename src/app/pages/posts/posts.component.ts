@@ -14,7 +14,7 @@ import { Post } from '../../model/post';
 })
 export class PostsComponent implements OnInit {
 
-  private posts : Post[] = [];
+  public posts : Post[] = [];
   private postService : PostService = inject(PostServiceImpl);
 
   ngOnInit(): void {

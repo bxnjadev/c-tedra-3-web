@@ -4,6 +4,7 @@ import { Form, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validat
 import { AuthenticationService } from '../../service/authentication.service';
 import { AuthenticationServiceImpl } from '../../service/authentication.service.impl';
 import { RegistrationRequest } from '../../model/registration.request';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +21,7 @@ export class RegisterComponent implements OnInit {
 
   form! : FormGroup;
 
+  router : Router = inject(Router);
   formBuilder : FormBuilder = inject(FormBuilder);
   authenticationService : AuthenticationService = inject(AuthenticationServiceImpl);
 
@@ -55,6 +57,7 @@ export class RegisterComponent implements OnInit {
     this.authenticationService.register(request).subscribe({
       next: () => {
           console.log("Cuenta creada correctamente");
+          this.router.navigate(['/auth']);
       },
       error: () => {
           console.log("Error creando la cuenta, el correo ya existe");

@@ -1,6 +1,11 @@
 import { CommonModule, NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../service/authentication.service';
+import { AuthenticationServiceImpl } from '../../service/authentication.service.impl';
+import { Authentication } from '../../model/authentication';
+import { LocalStorageService } from '../../service/local.storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +20,10 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class LoginComponent implements OnInit {
 
+  authenticateService : AuthenticationService = inject(AuthenticationServiceImpl);
+  localStorageService : LocalStorageService = inject(LocalStorageService);
+  router : Router = inject(Router);
   form! : FormGroup;
-
   formBuilder : FormBuilder = inject(FormBuilder);
 
   ngOnInit(): void {
@@ -40,6 +47,26 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit() {
+
+      var authenticationRequest : Authentication = {
+          email : this.getProperty('email')?.value,
+          password : this.getProperty('password')?.value
+      };
+
+      this.authenticateService.authenticate(
+        authenticationRequest
+      ).subscribe({
+          next: (token) => {
+              alert("Sesión Iniciada");
+              console.log("Saving TOKEN = " + token);
+              this.localStorageService.setVar('tokn', token);
+              this.router.navigate(['']);
+          },
+          error: ()  => {
+              alert("Credenciales invalidas");
+            
+          }
+      });
 
   }
 
