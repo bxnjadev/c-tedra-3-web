@@ -3,7 +3,7 @@ import { Post } from "../model/post"
 
 export interface PostService {
 
-    publish(title : string, 
+    publish(userId : string, title : string, 
         date : string, 
         image : File
     ) : Observable<Post>;

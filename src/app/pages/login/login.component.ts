@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
               alert("Sesión Iniciada");
               console.log("Saving TOKEN = " + token);
               this.localStorageService.setVar('token', token.tokenContent);
+              this.localStorageService.setVar('userId', token.userId);
               this.router.navigate(['']);
           },
           error: (error)  => {
