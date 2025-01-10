@@ -21,7 +21,9 @@ export class RegisterComponent implements OnInit {
 
   form! : FormGroup;
 
-  router : Router = inject(Router);
+  message : string = "";
+  showMessage : boolean = false;
+   router : Router = inject(Router);
   formBuilder : FormBuilder = inject(FormBuilder);
   authenticationService : AuthenticationService = inject(AuthenticationServiceImpl);
 
@@ -33,7 +35,7 @@ export class RegisterComponent implements OnInit {
   public createForm() : void {
       this.form = this.formBuilder.group({
         "email": ['', [Validators.required, Validators.email]],
-        "password": ['', [Validators.required]]
+        "password": ['', [Validators.required, Validators.pattern(/^(?=(.*\d.*))[\w\W]{6,}$/)]]
       });
   }
 
@@ -46,8 +48,14 @@ export class RegisterComponent implements OnInit {
     this.getProperty('password')?.valid;
   }
 
+  public resetForm() : void {
+    this.form.reset();
+  }
+
+
 
   public onSubmit() {
+
 
     var request : RegistrationRequest = {
         email : this.getProperty('email')?.value,
@@ -56,11 +64,12 @@ export class RegisterComponent implements OnInit {
 
     this.authenticationService.register(request).subscribe({
       next: () => {
-          console.log("Cuenta creada correctamente");
+          alert("Registrado correctamente");
+          this.resetForm();
           this.router.navigate(['/auth']);
       },
-      error: () => {
-          console.log("Error creando la cuenta, el correo ya existe");
+      error: (error) => {
+        alert(error);
       }
     });
 

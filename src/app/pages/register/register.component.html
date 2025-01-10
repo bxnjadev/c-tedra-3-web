@@ -18,12 +18,12 @@
 
             <div *ngIf="!getProperty('password')?.valid">
                 <p *ngIf="getProperty('password')?.errors?.['required']" class="text-red-600 text-sm">El campo no puede ser vacío</p>
-                <p *ngIf="getProperty('password')?.errors?.['email']" class="text-red-600 text-sm">El formato de correo no es valido</p>
+                <p *ngIf="getProperty('password')?.errors?.['pattern']" class="text-red-600 text-sm">La contraseña debe tener 6 carácteres y uno númerico</p>
             </div>
 
         </div>
 
-        <button [disabled]="!allPropertiesAreValid()" (click)="onSubmit()" type="submit" class="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full">Iniciar Sesión</button>
+        <button [disabled]="!allPropertiesAreValid()" type="submit" class="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full">Iniciar Sesión</button>
 
         <div>
         <p class="text-sm font-medium text-center pt-4 text-orange-600">¿Tienes cuenta?, inicia sesión: <a class="text-sky-600" href="auth">Clic aquí</a> </p> 

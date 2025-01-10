@@ -53,18 +53,18 @@ export class LoginComponent implements OnInit {
           password : this.getProperty('password')?.value
       };
 
+      console.log("SENDIN HTTP REQUEST_ " + authenticationRequest);
       this.authenticateService.authenticate(
         authenticationRequest
       ).subscribe({
           next: (token) => {
               alert("Sesión Iniciada");
               console.log("Saving TOKEN = " + token);
-              this.localStorageService.setVar('tokn', token);
+              this.localStorageService.setVar('token', token.tokenContent);
               this.router.navigate(['']);
           },
-          error: ()  => {
-              alert("Credenciales invalidas");
-            
+          error: (error)  => {
+              alert(error.status);
           }
       });
 

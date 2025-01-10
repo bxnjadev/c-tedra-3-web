@@ -2,8 +2,11 @@ import { Observable } from "rxjs";
 import { Post } from "../model/post";
 import { PostService } from "./post.service";
 import { HttpClient } from "@angular/common/http";
-import { inject } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 
+@Injectable({
+    providedIn: 'root'
+  })
 export class PostServiceImpl implements PostService {
 
     private httpClient : HttpClient = inject(HttpClient);
