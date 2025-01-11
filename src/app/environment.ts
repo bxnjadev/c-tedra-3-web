@@ -1,5 +1,5 @@
 export class Environment {
 
-    public static url : string = "https://localhost:44304/api/";
+    public static url : string = "http://localhost:5064/api/";
 
 }
