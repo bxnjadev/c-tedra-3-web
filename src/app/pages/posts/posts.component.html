@@ -3,11 +3,14 @@
         <h1 class="font-medium text-2xl pb-2">Visualización de Posts</h1>
         <hr>
     </header>
+    <a href="posts/create">¿Quieres crear un post?, Hazme clic</a>
+    <br>
+    <a href="auth" (click)="logout()">¿Quieres cerrar sesión?, Hazme clic</a>
     <main class="mt-4 ">
-        <div class="flex">
-            <div *ngIf="posts.length > 0; else noPosts">
+        <div class>
+            <div class="flex" *ngIf="posts.length > 0; else noPosts">
                 <div *ngFor="let post of posts">
-                    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div class="max-w-sm mr-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="#">
                             <img class="rounded-t-lg" [src]="post.url" alt="" />
                         </a>

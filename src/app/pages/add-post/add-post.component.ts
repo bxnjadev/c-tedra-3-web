@@ -19,6 +19,8 @@ import { Route, Router } from '@angular/router';
 })
 export class AddPostComponent  {
 
+  sizeMaxFile : number = 5 * 1024 * 1024;
+  fileLarge : boolean = false;
   form! : FormGroup;
   router : Router = inject(Router);
   formBuilder : FormBuilder = inject(FormBuilder);
@@ -41,6 +43,13 @@ export class AddPostComponent  {
     const input = event.target as HTMLInputElement;
     if (input?.files?.length) {
       const file = input.files[0];
+
+      if(file.size  > this.sizeMaxFile) {
+        this.fileLarge = true;
+      } else{
+        this.fileLarge = false;
+      }
+
       this.form.patchValue({ file }); 
     }
   }
@@ -62,8 +71,6 @@ export class AddPostComponent  {
 
       var userId = this.localStorageService.getVar('userId');
       var file = this.getProperty('file')?.value;
-
-      console.log("PUBLISSHH");
 
       this.postService.publish(userId, title, dateTransformed + "", 
         file

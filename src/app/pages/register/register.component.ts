@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/auth']);
       },
       error: (error) => {
-        alert(error);
+        alert("Este correo ya existe");
       }
     });
 

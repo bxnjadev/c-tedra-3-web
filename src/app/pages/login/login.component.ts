@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['']);
           },
           error: (error)  => {
-              alert(error.status);
+              alert("Credenciales invalidas");
           }
       });
 
